@@ -267,7 +267,7 @@ manage(Client * c, int mapped)
 		c->parent = XCreateSimpleWindow(dpy, c->screen->root,
 			c->size.x, c->size.y - titleHeight(),
 			c->size.width, c->size.height + titleHeight(),
-			1, c->screen->black, c->screen->white);
+			1, c->screen->colour, c->screen->white);
 
 		attr.event_mask = ExposureMask | EnterWindowMask | ButtonMask |
 			SubstructureRedirectMask | SubstructureNotifyMask |

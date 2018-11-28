@@ -39,6 +39,7 @@ char	*btn1_command;		/* User's choice of button 1 command. */
 char	*btn2_command;		/* User's choice of button 2 command. */
 int	border;			/* User's choice of border size. */
 FocusMode focus_mode;		/* User's choice of focus mode (default enter) */
+char	*colour_name;		/* User's choice of border colour. */
 
 char *
 sdup(char *p) {
@@ -64,6 +65,7 @@ parseResources(void) {
 	btn1_command = 0;
 	btn2_command = DEFAULT_TERMINAL;
 	focus_mode = focus_enter;
+	colour_name = DEFAULT_COLOUR;
 
 	resource_manager = XResourceManagerString(dpy);
 	if (resource_manager == 0)
@@ -101,4 +103,10 @@ parseResources(void) {
 		if (strcmp(value.addr, "enter") == 0) focus_mode = focus_enter;
 		if (strcmp(value.addr, "click") == 0) focus_mode = focus_click;
 	}
+
+	/* Border colour. */
+	if (XrmGetResource(db, "lwm.colour", "Color", &type, &value) == True)
+		if (strcmp(type, "String") == 0)
+			colour_name = sdup((char *) value.addr);
+
 }

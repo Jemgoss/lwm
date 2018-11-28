@@ -411,14 +411,15 @@ initScreen(int screen) {
 	screens[screen].strut.top = 0;
 	screens[screen].strut.bottom = 0;
 	
-	/* Get the pixel values of the only two colours we use. */
-	screens[screen].black = BlackPixel(dpy, screen);
+	/* Get the pixel values of the only three colours we use. */
+	XAllocNamedColor(dpy, DefaultColormap(dpy, screen), colour_name, &colour, &exact);
+	screens[screen].colour = colour.pixel;
 	screens[screen].white = WhitePixel(dpy, screen);
 	XAllocNamedColor(dpy, DefaultColormap(dpy, screen), "DimGray", &colour, &exact);
 	screens[screen].gray = colour.pixel;
 	
 	/* Set up root (frame) GC's. */
-	gv.foreground = screens[screen].black ^ screens[screen].white;
+	gv.foreground = screens[screen].colour ^ screens[screen].white;
 	gv.background = screens[screen].white;
 	gv.function = GXxor;
 	gv.line_width = 1;
@@ -434,7 +435,7 @@ initScreen(int screen) {
 	
 	/* Create a window for our popup. */
 	screens[screen].popup = XCreateSimpleWindow(dpy, screens[screen].root,
-		0, 0, 1, 1, 1, screens[screen].black, screens[screen].white);
+		0, 0, 1, 1, 1, screens[screen].colour, screens[screen].white);
 	attr.event_mask = ButtonMask | ButtonMotionMask | ExposureMask;
 	XChangeWindowAttributes(dpy, screens[screen].popup, CWEventMask, &attr);
 	
@@ -445,7 +446,7 @@ initScreen(int screen) {
 		GCLineWidth | GCSubwindowMode, &gv);
 	
 	/* Create size indicator GC. */
-	gv.foreground = screens[screen].black;
+	gv.foreground = screens[screen].colour;
 	gv.function = GXcopy;
 	screens[screen].size_gc = XCreateGC(dpy, screens[screen].popup,
 		GCForeground | GCBackground | GCFunction |

@@ -88,6 +88,9 @@ program spawned when button 2 is clicked on the root window
 .B focus
 focus mode, one of "enter" for enter-to-focus (or sloppy focus), or
 "click" for click-to-focus
+.TP 12
+.B colour
+border colour to use for active windows
 .SH "SEE ALSO"
 .PP
 X(7)

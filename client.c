@@ -99,7 +99,7 @@ Client_DrawBorder(Client *c, int active) {
 		return;
 
 	XSetWindowBackground(dpy, c->parent,
-		active ? c->screen->black : c->screen->gray);
+		active ? c->screen->colour : c->screen->gray);
 	XClearWindow(dpy, c->parent);
 
 	/* Draw the ``box''. */

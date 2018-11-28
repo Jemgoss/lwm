@@ -23,6 +23,7 @@
 #define DEFAULT_POPUP_FONT "-*-lucida-medium-r-normal-sans-12-*-*-*-p-*-iso10646-1"
 #define DEFAULT_TERMINAL "xterm"
 #define DEFAULT_BORDER 6
+#define DEFAULT_COLOUR "Black"
 
 #define HIDE_BUTTON Button3
 #define MOVE_BUTTON Button2
@@ -143,8 +144,8 @@ struct ScreenInfo {
 	GC menu_gc;	/* The GC for the popup window (menu). */
 	GC size_gc;	/* The GC for the popup window (sizing). */
 	
-	unsigned long black;		/* Black pixel value. */
-	unsigned long white;	/* White pixel value. */
+	unsigned long colour;		/* Colour pixel value. */
+	unsigned long white;		/* White pixel value. */
 	unsigned long gray;		/* Gray pixel value. */
 	
 	Cursor root_cursor;
@@ -328,6 +329,7 @@ extern char *btn1_command;
 extern char *btn2_command;
 extern int border;
 extern FocusMode focus_mode;
+extern char *colour_name;
 extern char * sdup(char *);
 extern void parseResources(void);
 
