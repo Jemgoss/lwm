@@ -105,8 +105,8 @@ parseResources(void) {
 	}
 
 	/* Border colour. */
-	if (XrmGetResource(db, "lwm.colour", "Color", &type, &value) == True)
+	if (XrmGetResource(db, "lwm.color", "Color", &type, &value) == True ||
+	    XrmGetResource(db, "lwm.colour", "Color", &type, &value) == True)
 		if (strcmp(type, "String") == 0)
 			colour_name = sdup((char *) value.addr);
-
 }
